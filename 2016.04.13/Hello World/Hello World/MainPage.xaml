@@ -8,6 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!-- Just a plain old button. I position it this way so it looks good in screenshots next to the visual we'll insert.-->
         <Button x:Name="AnimatingButton" Content="Hello, World!" HorizontalAlignment="Right" Margin="0, 50, 50, 0" />
     </Grid>
 </Page>
