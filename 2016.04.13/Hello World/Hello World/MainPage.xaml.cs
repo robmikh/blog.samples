@@ -55,7 +55,7 @@ namespace Hello_World
             animation.Duration = TimeSpan.FromMilliseconds(3000);
             animation.IterationBehavior = AnimationIterationBehavior.Forever;
 
-            visual.CenterPoint = new Vector3(75, 75, 0);
+            visual.CenterPoint = new Vector3(visual.Size.X / 2.0f, visual.Size.Y / 2.0f, 0);
             visual.StartAnimation("RotationAngleInDegrees", animation);
 
             var buttonVisual = ElementCompositionPreview.GetElementVisual(AnimatingButton);
