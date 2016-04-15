@@ -74,9 +74,11 @@ namespace Hello_World
 
             // CenterPoint determines the point the visual will rotate around, and because we want
             // the visual to rotate in place we set it to the center of the visual. Next we attach
-            // the animation we created to the RotationAngleInDegrees property of the visual.
+            // the animation we created to the RotationAngleInDegrees property of the visual. 
+            // StartAnimation takes a string, but you can use the nameof operator here to make your
+            // life much easier. Thanks to @NicoVermeir for the tip on that one!
             visual.CenterPoint = new Vector3(visual.Size.X / 2.0f, visual.Size.Y / 2.0f, 0);
-            visual.StartAnimation("RotationAngleInDegrees", animation);
+            visual.StartAnimation(nameof(visual.RotationAngleInDegrees), animation);
 
             // Next, let's get the visual that represents our button.
             var buttonVisual = ElementCompositionPreview.GetElementVisual(AnimatingButton);
@@ -86,7 +88,7 @@ namespace Hello_World
 
             // Start the animation using the same animation we used above, animations are completely
             // reusable!
-            buttonVisual.StartAnimation("RotationAngleInDegrees", animation);
+            buttonVisual.StartAnimation(nameof(buttonVisual.RotationAngleInDegrees), animation);
         }
     }
 }
