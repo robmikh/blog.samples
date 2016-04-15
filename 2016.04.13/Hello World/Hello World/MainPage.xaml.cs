@@ -50,7 +50,7 @@ namespace Hello_World
             var animation = compositor.CreateScalarKeyFrameAnimation();
             var easing = compositor.CreateLinearEasingFunction();
 
-            animation.InsertKeyFrame(0.0f, 0.0f, easing);
+            animation.InsertKeyFrame(0.0f, 0.0f);
             animation.InsertKeyFrame(1.0f, 360.0f, easing);
             animation.Duration = TimeSpan.FromMilliseconds(3000);
             animation.IterationBehavior = AnimationIterationBehavior.Forever;
