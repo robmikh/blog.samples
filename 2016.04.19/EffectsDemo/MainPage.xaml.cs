@@ -44,20 +44,24 @@ namespace EffectsDemo
             _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             _imageLoader = ImageLoaderFactory.CreateImageLoader(_compositor);
 
-            IGraphicsEffect graphicsEffect = new InvertEffect
+            IGraphicsEffect graphicsEffect = new HueRotationEffect
             {
-                Name = "invertEffect",
-                Source = new CompositeEffect
+                Name = "hueEffect",
+                Angle = 0.0f,
+                Source = new InvertEffect
                 {
-                    Mode = Microsoft.Graphics.Canvas.CanvasComposite.DestinationIn,
-                    Sources =
+                    Source = new CompositeEffect
                     {
-                        new CompositionEffectSourceParameter("image"),
-                        new CompositionEffectSourceParameter("mask")
+                        Mode = Microsoft.Graphics.Canvas.CanvasComposite.DestinationIn,
+                        Sources =
+                        {
+                            new CompositionEffectSourceParameter("image"),
+                            new CompositionEffectSourceParameter("mask")
+                        }
                     }
                 }
             };
-            _effectFactory = _compositor.CreateEffectFactory(graphicsEffect);
+            _effectFactory = _compositor.CreateEffectFactory(graphicsEffect, new string[] { "hueEffect.Angle" });
 
             var managedImageSurface = await _imageLoader.CreateManagedSurfaceFromUriAsync(new Uri("ms-appx:///Assets/tripphoto1.jpg"));
             var managedMaskSurface = await _imageLoader.CreateManagedSurfaceFromUriAsync(new Uri("ms-appx:///Assets/CircleMask.png"));
@@ -77,6 +81,22 @@ namespace EffectsDemo
             visual.Brush = effectBrush;
 
             ElementCompositionPreview.SetElementChildVisual(this, visual);
+
+            AnimateEffect(effectBrush);
+        }
+
+        private void AnimateEffect(CompositionEffectBrush effectBrush)
+        {
+            var animation = _compositor.CreateScalarKeyFrameAnimation();
+            var easing = _compositor.CreateLinearEasingFunction();
+
+            animation.InsertKeyFrame(0.0f, 0.0f);
+            animation.InsertKeyFrame(1.0f, (float)(2.0 * Math.PI), easing);
+
+            animation.IterationBehavior = AnimationIterationBehavior.Forever;
+            animation.Duration = TimeSpan.FromMilliseconds(4000);
+
+            effectBrush.StartAnimation("hueEffect.Angle", animation);
         }
     }
 }
