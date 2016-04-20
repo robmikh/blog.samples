@@ -1,24 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{19573383-a613-415a-aa1a-2c0e045035e2}</ProjectGuid>
+    <ProjectGuid>{05B4EAFA-80D0-403F-8EE1-9FD48869E111}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hello_World</RootNamespace>
-    <AssemblyName>Hello World</AssemblyName>
+    <RootNamespace>ImageLoading</RootNamespace>
+    <AssemblyName>ImageLoading</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    
-    <PackageCertificateKeyFile>Hello World_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
+    <PackageCertificateKeyFile>ImageLoading_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -106,31 +104,32 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
-    <None Include="Hello World_TemporaryKey.pfx" />
-    
+    <None Include="ImageLoading_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\Images\tripphoto1.jpg">
+      <Link>Assets\tripphoto1.jpg</Link>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
-	<Content Include="..\..\..\Images\Tiles\LockScreenLogo.scale-200.png">
+    <Content Include="..\..\Images\Tiles\LockScreenLogo.scale-200.png">
       <Link>Assets\LockScreenLogo.scale-200.png</Link>
     </Content>
-	<Content Include="..\..\..\Images\Tiles\SplashScreen.scale-200.png">
+	<Content Include="..\..\Images\Tiles\SplashScreen.scale-200.png">
       <Link>Assets\SplashScreen.scale-200.png</Link>
     </Content>
-	<Content Include="..\..\..\Images\Tiles\Square150x150Logo.scale-200.png">
+	<Content Include="..\..\Images\Tiles\Square150x150Logo.scale-200.png">
       <Link>Assets\Square150x150Logo.scale-200.png</Link>
     </Content>
-	<Content Include="..\..\..\Images\Tiles\Square44x44Logo.scale-200.png">
+	<Content Include="..\..\Images\Tiles\Square44x44Logo.scale-200.png">
       <Link>Assets\Square44x44Logo.scale-200.png</Link>
     </Content>
-	<Content Include="..\..\..\Images\Tiles\Square44x44Logo.targetsize-24_altform-unplated.png">
+	<Content Include="..\..\Images\Tiles\Square44x44Logo.targetsize-24_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</Link>
     </Content>
-	<Content Include="..\..\..\Images\Tiles\StoreLogo.png">
+	<Content Include="..\..\Images\Tiles\StoreLogo.png">
       <Link>Assets\StoreLogo.png</Link>
     </Content>
-	<Content Include="..\..\..\Images\Tiles\Wide310x150Logo.scale-200.png">
+	<Content Include="..\..\Images\Tiles\Wide310x150Logo.scale-200.png">
       <Link>Assets\Wide310x150Logo.scale-200.png</Link>
     </Content>
   </ItemGroup>
@@ -144,11 +143,9 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
-
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
