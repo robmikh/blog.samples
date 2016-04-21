@@ -34,17 +34,24 @@ namespace ImageLoading
 
         private async void InitComposition()
         {
+            // Obtain a Compositor and use it to initialize our ImageLoader. 
+            // Make sure you have the CompositionImageLoader nuget package:
+            // https://www.nuget.org/packages/Robmikh.Util.CompositionImageLoader
             var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             var imageLoader = ImageLoaderFactory.CreateImageLoader(compositor);
 
+            // Create a ManagedSurface, which is resilient to having our device lost suddenly.
             var managedSurface = await imageLoader.CreateManagedSurfaceFromUriAsync(new Uri("ms-appx:///Assets/tripphoto1.jpg"));
+            // Create a brush using our new surface.
             var brush = compositor.CreateSurfaceBrush(managedSurface.Surface);
 
+            // Create a visual and assign our brush to the visual's Brush property.
             var visual = compositor.CreateSpriteVisual();
-            visual.Size = managedSurface.Size.ToVector2();
+            visual.Size = managedSurface.Size.ToVector2(); // We use the image's real size so we avoid stretching. This isn't strictly necessary.
             visual.Offset = new Vector3(50, 50, 0);
             visual.Brush = brush;
 
+            // Attach our visual into the tree.
             ElementCompositionPreview.SetElementChildVisual(this, visual);
         }
     }
