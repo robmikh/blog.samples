@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="VideoDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VideoDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Name="PauseButton" Icon="Pause" Label="Pause" Click="PauseButton_Click" />
+            <AppBarButton x:Name="PlayButton" Icon="Play" Label="Play" Click="PlayButton_Click" />
+            <AppBarToggleButton x:Name="EffectButton" Icon="Video" Label="Apply Effect" Click="EffectButton_Click" IsEnabled="False" />
+            <AppBarButton x:Name="OpenButton" Icon="OpenFile" Label="Open Video" Click="OpenButton_Click" />
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
