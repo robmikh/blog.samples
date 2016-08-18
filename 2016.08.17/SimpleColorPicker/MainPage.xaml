@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="SimpleColorPicker.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimpleColorPicker"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Color Picker" Style="{ThemeResource HeaderTextBlockStyle}" Margin="10, 5, 0, 5"/>
+
+        <GridView x:Name="MainGridView" Grid.Row="1" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick" Margin="10, 0, 10, 0">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local:ColorItem">
+                    <Grid Width="100" Height="100">
+                        <Rectangle Fill="{x:Bind ColorBrush}" />
+                        <TextBlock Text="{x:Bind ColorHexValue}"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Margin="5"
+                                   TextAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>
