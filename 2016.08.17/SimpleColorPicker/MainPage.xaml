@@ -15,7 +15,7 @@
 
         <TextBlock Text="Color Picker" Style="{ThemeResource HeaderTextBlockStyle}" Margin="10, 5, 0, 5"/>
 
-        <GridView x:Name="MainGridView" Grid.Row="1" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick" Margin="10, 0, 10, 0">
+        <GridView x:Name="MainGridView" Grid.Row="1" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick" Margin="10, 0, 10, 0" ContainerContentChanging="MainGridView_ContainerContentChanging">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local:ColorItem">
                     <Grid Width="100" Height="100">
