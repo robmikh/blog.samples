@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,19 +29,22 @@ namespace SimpleColorPicker
     public sealed partial class MainPage : Page
     {
         private ImplicitAnimationCollection _implicitAnimations;
+        private ObservableCollection<ColorItem> _list;
+        private Random _random;
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            var list = CreateColorItems();
+            _random = new Random();
+            _list = CreateColorItems();
 
-            MainGridView.ItemsSource = list;
+            MainGridView.ItemsSource = _list;
         }
 
-        private List<ColorItem> CreateColorItems()
+        private static ObservableCollection<ColorItem> CreateColorItems()
         {
-            var list = new List<ColorItem>();
+            var list = new ObservableCollection<ColorItem>();
 
             list.Add(new ColorItem(Color.FromArgb(255, 255, 185, 0)));
             list.Add(new ColorItem(Color.FromArgb(255, 231, 72, 86)));
@@ -109,7 +113,7 @@ namespace SimpleColorPicker
                 rotationAnimation.Target = nameof(Visual.RotationAngle);
                 rotationAnimation.InsertKeyFrame(.5f, 0.160f);
                 rotationAnimation.InsertKeyFrame(1f, 0f);
-                rotationAnimation.Duration = TimeSpan.FromSeconds(400);
+                rotationAnimation.Duration = TimeSpan.FromMilliseconds(400);
 
                 var animationGroup = compositor.CreateAnimationGroup();
                 animationGroup.Add(offsetAnimation);
@@ -139,7 +143,7 @@ namespace SimpleColorPicker
                 var elementVisual = ElementCompositionPreview.GetElementVisual(args.ItemContainer);
                 if (args.InRecycleQueue)
                 {
-                    elementVisual.ImplicitAnimations = null;
+                    PokeUIElementZIndex(args.ItemContainer);
                 }
                 else
                 {
@@ -147,6 +151,37 @@ namespace SimpleColorPicker
                     elementVisual.ImplicitAnimations = _implicitAnimations;
                 }
             }
+        }
+
+        private void OnAddButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var color = Color.FromArgb(255, (byte)_random.Next(0, 256), (byte)_random.Next(0, 256), (byte)_random.Next(0, 256));
+            var item = new ColorItem(color);
+
+            _list.Add(item);
+        }
+
+        private void OnRemoveButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (_list.Count > 0)
+            {
+                _list.RemoveAt(_list.Count - 1);
+            }
+        }
+
+        private void MainGridView_ChoosingItemContainer(ListViewBase sender, ChoosingItemContainerEventArgs args)
+        {
+            if (args.ItemContainer != null)
+            {
+                PokeUIElementZIndex(args.ItemContainer);
+            }
+        }
+
+        private static void PokeUIElementZIndex(UIElement element)
+        {
+            var oldZIndex = Canvas.GetZIndex(element);
+            Canvas.SetZIndex(element, 1000);
+            Canvas.SetZIndex(element, oldZIndex);
         }
     }
 }

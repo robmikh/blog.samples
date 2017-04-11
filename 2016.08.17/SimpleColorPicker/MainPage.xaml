@@ -11,11 +11,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Text="Color Picker" Style="{ThemeResource HeaderTextBlockStyle}" Margin="10, 5, 0, 5"/>
 
-        <GridView x:Name="MainGridView" Grid.Row="1" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick" Margin="10, 0, 10, 0" ContainerContentChanging="MainGridView_ContainerContentChanging">
+        <GridView x:Name="MainGridView" Grid.Row="1" IsItemClickEnabled="True" ItemClick="MainGridView_ItemClick" Margin="10, 0, 10, 0" ContainerContentChanging="MainGridView_ContainerContentChanging" ChoosingItemContainer="MainGridView_ChoosingItemContainer">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local:ColorItem">
                     <Grid Width="100" Height="100">
@@ -30,5 +31,14 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"  Content="Add" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OnAddButtonClicked"/>
+            <Button Grid.Column="1"  Content="Remove" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OnRemoveButtonClicked" />
+        </Grid>
     </Grid>
 </Page>
