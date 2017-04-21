@@ -45,6 +45,10 @@ namespace VideoDemo
 
             // Create our MediaPlayer
             _player = new MediaPlayer();
+            _player.PlaybackSession.NaturalVideoSizeChanged += (sender, args) =>
+            {
+                sender.MediaPlayer.SetSurfaceSize(new Size(sender.NaturalVideoWidth, sender.NaturalVideoHeight));
+            };
         }
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
@@ -144,7 +148,9 @@ namespace VideoDemo
 
                 // Make a brush out of it and apply it to our effect.
                 _videoBrush = _compositor.CreateSurfaceBrush(surface);
-                //_visual.Brush = _videoBrush;
+                _videoBrush.Stretch = CompositionStretch.Uniform;
+                _videoBrush.HorizontalAlignmentRatio = 0.5f;
+                _videoBrush.VerticalAlignmentRatio = 0.5f;
                 _effectBrush.SetSourceParameter("Video", _videoBrush);
 
                 // Enable our button now that we have everything set up.
